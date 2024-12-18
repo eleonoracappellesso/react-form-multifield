@@ -6,7 +6,9 @@ const initialPost = {
     title: "",
     published: false,
     id: null,
-    image: "https://via.placeholder.com/150",
+    image: "",
+    // image: "https://via.placeholder.com/150",
+    content: "",
 };
 
 function PostForm({ addPost }) {
@@ -54,6 +56,30 @@ function PostForm({ addPost }) {
                         className="form-control"
                         value={post.title}
                         name="title"
+                        onChange={handleInput}
+                    />
+                </div>
+                <div className="my-2">
+                    <label htmlFor="content" className="form-label">
+                        Contenuto del post:
+                    </label>
+                    <textarea
+                        type="text"
+                        className="form-control"
+                        value={post.content}
+                        name="content"
+                        onChange={handleInput}
+                    />
+                </div>
+                <div className="my-2">
+                    <label htmlFor="content" className="form-label">
+                        Inserisci un'immagine:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={post.image}
+                        name="image"
                         onChange={handleInput}
                     />
                 </div>
