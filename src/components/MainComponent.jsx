@@ -1,5 +1,5 @@
 import { useState } from "react";
-import allPosts from "../data/post";
+import { allPosts } from "../data/post";
 import CardComponent from "./CardComponent"
 import PostForm from "./PostForm";
 
@@ -16,6 +16,22 @@ function MainComponent() {
         const updatedPostList = posts.filter(post => post.id !== id);
         setPosts(updatedPostList);
     }
+
+    function handleTag(e) {
+        setPosts((post) => {
+            let { tags, ...others } = post;
+            if (tags.includes(e.target.value)) {
+                tags = tags.filter((val) => val !== e.target.value);
+            } else {
+                tags = [...tags, e.target.value];
+            }
+            return {
+                tags,
+                ...others,
+            };
+        });
+    }
+
     // struttura del main component
     return (
         <main className="container">
@@ -25,7 +41,7 @@ function MainComponent() {
                 ))}
             </section>
             {/*includo il form e gli passo la funzione per inviare il nuovo post al component padre, il main */}
-            <PostForm addPost={handleNewPost} removePost={handleDeletePost} />
+            <PostForm addPost={handleNewPost} removePost={handleDeletePost} handleTag={handleTag} />
         </main>
     )
 }
